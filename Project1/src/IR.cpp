@@ -24,10 +24,12 @@ void IR::findWinner() {
       addWinners(candidates[i]);
     }
     else if (elim->getNumBallots() == 0){
+      // if person to eliminate is already eliminated, change elim to this candidate
       elim = &candidates[i];
     }
     else if ((candidates[i].getNumBallots() < elim->getNumBallots()) &&
         candidates[i].getNumBallots() != 0) {
+      // if person to eliminate has more votes than this candidate, change elim to this candidate
       writeToAuditFile(candidates[i].getName() + " has less ballots than " +
                        elim->getName() +
                        " and currently has the lowest amount of ballots.\n");
@@ -56,7 +58,7 @@ void IR::elimination() {
       // ensures the ballot index is non-negative and that there exists another
       // candidate to vote for
 
-      // ensures that the candidate we're giving it too isn't out of the race
+      // ensures that the candidate we're giving it to isn't out of the race
       // (i.e. has 0 ballots)
 
       // ensures we don't over increment the ballot
